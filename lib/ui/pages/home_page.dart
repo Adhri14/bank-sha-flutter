@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_app/shared/theme.dart';
+import 'package:test_flutter_app/ui/widgets/buttons.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -77,7 +78,12 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        children: [buildProfile(), buildWalletCard(), buildLevel()],
+        children: [
+          buildProfile(),
+          buildWalletCard(),
+          buildLevel(context),
+          buildService(),
+        ],
       ),
     );
   }
@@ -219,7 +225,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildLevel() {
+  Widget buildLevel(BuildContext context) {
+    double width = MediaQuery.of(context).size.width * 0.5;
     return Container(
       padding: const EdgeInsets.all(22),
       margin: const EdgeInsets.only(top: 20),
@@ -231,10 +238,82 @@ class HomePage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text("Level 1"),
+              Text(
+                "Level 1",
+                style: blackTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: medium,
+                ),
+              ),
               const Spacer(),
-              Text("50% "),
-              Text("of Rp. 50.000"),
+              Text(
+                "50% ",
+                style: greenTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: semiBold,
+                ),
+              ),
+              Text(
+                "of Rp. 50.000",
+                style: blackTextStyle.copyWith(
+                  fontSize: 14,
+                  fontWeight: semiBold,
+                ),
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: 3,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(55),
+              color: lightGreyColor,
+            ),
+            child: Stack(
+              children: [
+                Container(
+                  width: width,
+                  decoration: BoxDecoration(
+                    color: greenColor,
+                    borderRadius: BorderRadius.circular(55),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildService() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Do Something",
+            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ButtonService(title: 'Top Up'),
+              ButtonService(
+                title: 'Send',
+                image: AssetImage('assets/ic_send.png'),
+              ),
+              ButtonService(
+                title: 'Withdraw',
+                image: AssetImage('assets/ic_withdraw.png'),
+              ),
+              ButtonService(
+                title: 'More',
+                image: AssetImage('assets/ic_more.png'),
+              ),
             ],
           ),
         ],

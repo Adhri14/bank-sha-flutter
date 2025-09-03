@@ -68,3 +68,38 @@ class ButtonLink extends StatelessWidget {
     );
   }
 }
+
+class ButtonService extends StatelessWidget {
+  final String title;
+  final VoidCallback? onTap;
+  final AssetImage? image;
+  const ButtonService({super.key, required this.title, this.onTap, this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                scale: 2.0,
+                image: image ?? AssetImage('assets/ic_topup.png'),
+              ),
+            ),
+            margin: const EdgeInsets.only(bottom: 5),
+          ),
+          Text(
+            title,
+            style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
+          ),
+        ],
+      ),
+    );
+  }
+}
